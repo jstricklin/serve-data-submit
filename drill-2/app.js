@@ -6,13 +6,14 @@ const Papa = require('papaparse')
 const fs = require('fs')
 const path = require('path')
 const port = process.env.PORT || 3000
+const cors = require('cors')
 
 if (process.env.NODE_ENV === "development") app.use(morgan('dev'))
 app.use(morgan('combined'))
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-
+app.use(cors())
 const csvPath = path.join(__dirname, 'db', 'instructors.csv')
 const csv = fs.readFileSync(csvPath, 'utf8')
 const options = { header: true, skipEmptyLines: true, dynamicTyping: true }
